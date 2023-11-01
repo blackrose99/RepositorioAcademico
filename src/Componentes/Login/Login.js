@@ -4,7 +4,7 @@ import { useTransition, animated } from 'react-spring';
 function Login() {
   const [isStudent, setIsStudent] = useState(true);
 
-  // Define la animación de entrada/salida
+  // Define la animación de entrada/salida e
   const transitions = useTransition(isStudent, null, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
