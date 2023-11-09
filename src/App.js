@@ -1,23 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+// Componentes Principales
+import Home from "./Componentes/Globales/Home";
+import Login from "./Componentes/Login/Login"; // Importar el componente de inicio de sesión
+import StudentDashboard from "./Componentes/Estudiantes/PanelEstudiante"; // Componente del dashboard del estudiante
+import TeacherDashboard from "./Componentes/Docentes/PanelProfesor"; // Componente del dashboard del profesor
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+      <BrowserRouter>
+        <div className="">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            
+            {/* Rutas para los Estudiantes */}
+             <Route path="/login" element={<Login />} /> 
+            <Route path="/student" element={<StudentDashboard />} /> {/* Ruta para el dashboard del estudiante */}
+            
+            {/* Rutas para los Docentes */}
+            <Route path="/teacher" element={<TeacherDashboard />} /> {/* Ruta para el dashboard del profesor */}
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }

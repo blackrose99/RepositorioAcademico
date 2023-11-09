@@ -1,54 +1,87 @@
 import React, { useState } from 'react';
-import { useTransition, animated } from 'react-spring';
+import './Login.css'; // Importa el archivo CSS
+import Header from "../Globales/Header"
 
-function Login() {
-  const [isStudent, setIsStudent] = useState(true);
+import LoginImg from '../Globales/img_G/login.png';
+import Footer from "../Globales/Footer"
 
-  // Define la animación de entrada/salida e
-  const transitions = useTransition(isStudent, null, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-  });
+const InicioSesion = () => {
+  const [tipoUsuario, setTipoUsuario] = useState('estudiante');
+  const [mostrarFormularioDocente, setMostrarFormularioDocente] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Lógica de autenticación
+  };
+
+  const cambiarTipoUsuario = (nuevoTipo) => {
+    if (nuevoTipo === 'docente') {
+      setMostrarFormularioDocente(true);
+    } else {
+      setMostrarFormularioDocente(false);
+    }
+    setTipoUsuario(nuevoTipo);
+  };
+
+  const cardClass = tipoUsuario === 'estudiante' ? 'cardLogin estudiante' : 'cardLogin docente';
 
   return (
     <div>
-      <h2>Login</h2>
-      <label>
-        <input
-          type="radio"
-          name="userType"
-          value="student"
-          checked={isStudent}
-          onChange={() => setIsStudent(true)}
-        />
-        Estudiante
-      </label>
-      <label>
-        <input
-          type="radio"
-          name="userType"
-          value="teacher"
-          checked={!isStudent}
-          onChange={() => setIsStudent(false)}
-        />
-        Docente
-      </label>
-      {transitions.map(({ item, key, props }) =>
-        item ? (
-          <animated.div key={key} style={props}>
-            {/* Contenido para estudiantes */}
-            <p>Contenido para estudiantes</p>
-          </animated.div>
-        ) : (
-          <animated.div key={key} style={props}>
-            {/* Contenido para docentes */}
-            <p>Contenido para docentes</p>
-          </animated.div>
-        )
+      <Header/>
+
+    <div className={cardClass}>
+      <h1>Iniciar Sesión</h1>
+     
+
+      <img className="image" src={LoginImg} alt="Inicio de Sesión" />
+      <div className="switch-container">
+        <button
+          className={tipoUsuario === 'estudiante' ? 'switch-btn active' : 'switch-btn'}
+          onClick={() => cambiarTipoUsuario('docente')}
+        >
+          Docente
+        </button>
+        <button
+          className={tipoUsuario === 'docente' ? 'switch-btn active' : 'switch-btn'}
+          onClick={() => cambiarTipoUsuario('estudiante')}
+        >
+           Estudiante
+        </button>
+      </div>
+
+      {mostrarFormularioDocente ? (
+        <form onSubmit={handleSubmit}>
+          <label>
+            Usuario:
+            <input type="text" />
+          </label>
+          <label>
+            Contraseña:
+            <input type="password" />
+          </label>
+          <button type="submit">
+            Iniciar Sesión como Docente
+          </button>
+        </form>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <label>
+            Usuario:
+            <input type="text" />
+          </label>
+          <label>
+            Contraseña:
+            <input type="password" />
+          </label>
+          <button type="submit">
+            Iniciar Sesión como Estudiante
+          </button>
+        </form>
       )}
     </div>
+    <Footer/>
+    </div>
   );
-}
+};
 
-export default Login;
+export default InicioSesion;
