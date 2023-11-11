@@ -27,59 +27,59 @@ const InicioSesion = () => {
 
   return (
     <div>
-      <Header/>
+      <Header />
 
-    <div className={cardClass}>
-      <h1>Iniciar Sesión</h1>
-     
+      <div className={cardClass}>
+        <h1>Iniciar Sesión</h1>
+        <h2>UNIDADES</h2>
 
-      <img className="image" src={LoginImg} alt="Inicio de Sesión" />
-      <div className="switch-container">
-        <button
-          className={tipoUsuario === 'estudiante' ? 'switch-btn active' : 'switch-btn'}
-          onClick={() => cambiarTipoUsuario('docente')}
-        >
-          Docente
-        </button>
-        <button
-          className={tipoUsuario === 'docente' ? 'switch-btn active' : 'switch-btn'}
-          onClick={() => cambiarTipoUsuario('estudiante')}
-        >
-           Estudiante
-        </button>
+          <img className="image" src={LoginImg} alt="Inicio de Sesión" />
+          <div className="switch-container">
+            <button
+              className={tipoUsuario === 'estudiante' ? 'switch-btn active' : 'switch-btn'}
+              onClick={() => cambiarTipoUsuario('docente')}
+            >
+              Docente
+            </button>
+            <button
+              className={tipoUsuario === 'docente' ? 'switch-btn active' : 'switch-btn'}
+              onClick={() => cambiarTipoUsuario('estudiante')}
+            >
+              Estudiante
+            </button>
+          </div>
+
+          {mostrarFormularioDocente ? (
+            <form onSubmit={handleSubmit}>
+              <label>
+                Usuario:
+                <input type="text" />
+              </label>
+              <label>
+                Contraseña:
+                <input type="password" />
+              </label>
+              <button type="submit">
+                Iniciar Sesión como Docente
+              </button>
+            </form>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <label>
+                Usuario:
+                <input type="text" />
+              </label>
+              <label>
+                Contraseña:
+                <input type="password" />
+              </label>
+              <button type="submit">
+                Iniciar Sesión como Estudiante
+              </button>
+            </form>
+          )}
       </div>
-
-      {mostrarFormularioDocente ? (
-        <form onSubmit={handleSubmit}>
-          <label>
-            Usuario:
-            <input type="text" />
-          </label>
-          <label>
-            Contraseña:
-            <input type="password" />
-          </label>
-          <button type="submit">
-            Iniciar Sesión como Docente
-          </button>
-        </form>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <label>
-            Usuario:
-            <input type="text" />
-          </label>
-          <label>
-            Contraseña:
-            <input type="password" />
-          </label>
-          <button type="submit">
-            Iniciar Sesión como Estudiante
-          </button>
-        </form>
-      )}
-    </div>
-    <Footer/>
+      <Footer />
     </div>
   );
 };
