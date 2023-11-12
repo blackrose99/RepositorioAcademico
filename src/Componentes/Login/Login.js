@@ -27,56 +27,39 @@ const InicioSesion = () => {
 
   return (
     <div>
-      <Header/>
-
-    <div className={cardClass}>
-      <h1>Iniciar Sesión</h1>
-     
-
-      <img className="image" src={LoginImg} alt="Inicio de Sesión" />
-      <div className="switch-container">
-        <button
-          className={tipoUsuario === 'estudiante' ? 'switch-btn active' : 'switch-btn'}
-          onClick={() => cambiarTipoUsuario('docente')}
-        >
-          Docente
-        </button>
-        <button
-          className={tipoUsuario === 'docente' ? 'switch-btn active' : 'switch-btn'}
-          onClick={() => cambiarTipoUsuario('estudiante')}
-        >
-           Estudiante
-        </button>
-      </div>
-
-      {mostrarFormularioDocente ? (
-        <form onSubmit={handleSubmit}>
-          <label>
-            Usuario:
-            <input type="text" />
-          </label>
-          <label>
-            Contraseña:
-            <input type="password" />
-          </label>
-          <button type="submit">
-            Iniciar Sesión como Docente
-          </button>
-        </form>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <label>
-            Usuario:
-            <input type="text" />
-          </label>
-          <label>
-            Contraseña:
-            <input type="password" />
-          </label>
-          <button type="submit">
-            Iniciar Sesión como Estudiante
-          </button>
-        </form>
+      <h2>Login</h2>
+      <label>
+        <input
+          type="radio"
+          name="userType"
+          value="student"
+          checked={isStudent}
+          onChange={() => setIsStudent(true)}
+        />
+        Estudiante
+      </label>
+      <label>
+        <input
+          type="radio"
+          name="userType"
+          value="teacher"
+          checked={!isStudent}
+          onChange={() => setIsStudent(false)}
+        />
+        Docente
+      </label>
+      {transitions.map(({ item, key, props }) =>
+        item ? (
+          <animated.div key={key} style={props}>
+            {/* Contenido para estudiantes */}
+            <p>Contenido para estudiantes</p>
+          </animated.div>
+        ) : (
+          <animated.div key={key} style={props}>
+            {/* Contenido para docentes */}
+            <p>Contenido para docentes</p>
+          </animated.div>
+        )
       )}
     </div>
     <Footer/>
