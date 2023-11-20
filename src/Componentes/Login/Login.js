@@ -31,7 +31,7 @@ const InicioSesion = () => {
 
       <div className={cardClass}>
         <h1>Iniciar Sesión</h1>
-        <h2>UNIDADES</h2>
+
 
           <img className="image" src={LoginImg} alt="Inicio de Sesión" />
           <div className="switch-container">
