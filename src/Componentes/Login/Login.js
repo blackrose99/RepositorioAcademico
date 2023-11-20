@@ -1,29 +1,34 @@
 import React, { useState } from 'react';
-import './Login.css'; // Importa el archivo CSS
-import Header from "../Globales/Header"
+import { useNavigate } from 'react-router-dom';
+import EstudianteService from '../../servicios/EstudianteServices';
+import NavigationBar from '../../plantillas/encabezado';
+import './EstudianteLoginForm.css'; // Importa tus estilos CSS
 
-import LoginImg from '../Globales/img_G/login.png';
-import Footer from "../Globales/Footer"
+function EstudianteLoginForm() {
+  const navigate = useNavigate();
 
-const InicioSesion = () => {
-  const [tipoUsuario, setTipoUsuario] = useState('estudiante');
-  const [mostrarFormularioDocente, setMostrarFormularioDocente] = useState(false);
+  const [formData, setFormData] = useState({
+    numeroDocumento: '',
+    numeroRegistro: '',
+    mensajeError: '',
+  });
 
-  const handleSubmit = (e) => {
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Lógica de autenticación
-  };
 
-  const cambiarTipoUsuario = (nuevoTipo) => {
-    if (nuevoTipo === 'docente') {
-      setMostrarFormularioDocente(true);
-    } else {
-      setMostrarFormularioDocente(false);
+    const { numeroDocumento, numeroRegistro } = formData;
+
+    try {
+      const estudianteId = await EstudianteService.loginEstudiante(numeroDocumento, numeroRegistro);
+      navigate(`/estudiantes/${estudianteId}`);
+    } catch (error) {
+      setFormData({ ...formData, mensajeError: error.message });
     }
-    setTipoUsuario(nuevoTipo);
   };
-
-  const cardClass = tipoUsuario === 'estudiante' ? 'cardLogin estudiante' : 'cardLogin docente';
 
   return (
     <div>
@@ -79,9 +84,8 @@ const InicioSesion = () => {
             </form>
           )}
       </div>
-      <Footer />
     </div>
   );
-};
+}
 
-export default InicioSesion;
+export default EstudianteLoginForm;

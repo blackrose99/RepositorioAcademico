@@ -18,7 +18,7 @@ function App() {
             
             {/* Rutas para los Estudiantes */}
              <Route path="/login" element={<Login />} /> 
-            <Route path="/student" element={<StudentDashboard />} /> {/* Ruta para el dashboard del estudiante */}
+            <Route path="/estudiantes" element={<StudentDashboard />} /> {/* Ruta para el dashboard del estudiante */}
             
             {/* Rutas para los Docentes */}
             <Route path="/teacher" element={<TeacherDashboard />} /> {/* Ruta para el dashboard del profesor */}
