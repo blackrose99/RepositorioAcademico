@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';  // Cambié useHistory por useNavigate
 import DocentesService from '../../Services/DocenteServices';
 
 const CrearDocumento = () => {
     const { id } = useParams();
+    const navigate = useNavigate();  // Cambié useHistory por useNavigate
   
     // Estados para los datos del documento y el archivo
     const [nombre, setNombre] = useState('');
@@ -43,6 +44,13 @@ const CrearDocumento = () => {
   
         // Maneja la respuesta según sea necesario
         console.log('Documento creado:', response.data);
+  
+        // Redirige a otra página
+        navigate('/otra-pagina');  // Cambié history.push por navigate
+  
+        // Limpia los campos del formulario
+        limpiarCampos();
+  
       } catch (error) {
         // Maneja los errores
         console.error('Error al crear el documento:', error.message);
@@ -71,6 +79,15 @@ const CrearDocumento = () => {
       });
     };
   
+    const limpiarCampos = () => {
+      setNombre('');
+      setCategoria('');
+      setAutor('');
+      setDescripcion('');
+      setFechaPublicacion('');
+      setArchivo(null);
+    };
+  
     return (
       <div>
         <h2>Crear Nuevo Documento</h2>
@@ -91,12 +108,12 @@ const CrearDocumento = () => {
           <input type="datetime-local" value={fechaPublicacion} onChange={(e) => setFechaPublicacion(e.target.value)} required />
   
           <label>Archivo:</label>
-          <input type="file" onChange={handleFileChange} required />
+          <input type="file" onChange={handleFileChange}  />
   
           <button type="submit">Crear Documento</button>
         </form>
       </div>
     );
-  };
-  
-  export default CrearDocumento;
+};
+
+export default CrearDocumento;

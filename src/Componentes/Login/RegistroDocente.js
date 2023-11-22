@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import EstudianteService from "../../Services/EstudianteServices";
+import DocentesService from "../../Services/DocenteServices"; // Ajusta la ruta según tu estructura de carpetas
 import Header from "../Globales/Header";
-import "./RegistroEstudiante.css"; // Archivo CSS para estilos
 import "./Registro.css";
 
-function CrearEditarEstudiante() {
-  const [estudianteData, setEstudianteData] = useState({
+
+function CrearEditarDocente() {
+  const [docenteData, setDocenteData] = useState({
     numeroDocumento: "",
     primerApellido: "",
     segundoApellido: "",
@@ -21,91 +21,88 @@ function CrearEditarEstudiante() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-
-
   useEffect(() => {
     if (id) {
       setEditing(true);
-      EstudianteService.getEstudianteById(id)
+      DocentesService.getDocenteById(id)
         .then((response) => {
-          const estudiante = response.data;
-          setEstudianteData({
-            numeroDocumento: estudiante.numeroDocumento,
-            primerApellido: estudiante.primerApellido,
-            segundoApellido: estudiante.segundoApellido,
-            primerNombre: estudiante.primerNombre,
-            segundoNombre: estudiante.segundoNombre,
-            correoElectronico: estudiante.correoElectronico,
-            numeroTelefonico: estudiante.numeroTelefonico,
-            password: estudiante.password,
+          const docente = response.data;
+          setDocenteData({
+            numeroDocumento: docente.numeroDocumento,
+            primerApellido: docente.primerApellido,
+            segundoApellido: docente.segundoApellido,
+            primerNombre: docente.primerNombre,
+            segundoNombre: docente.segundoNombre,
+            correoElectronico: docente.correoElectronico,
+            numeroTelefonico: docente.numeroTelefonico,
+            password: docente.password,
           });
         })
         .catch((error) => {
-          console.error("Error al obtener los datos del estudiante", error);
+          console.error("Error al obtener los datos del docente", error);
         });
     }
   }, [id]);
 
   const handleInputChange = (e) => {
-    setEstudianteData({
-      ...estudianteData,
+    setDocenteData({
+      ...docenteData,
       [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const estudianteDataToSend = {
-      numeroDocumento: estudianteData.numeroDocumento,
-      primerApellido: estudianteData.primerApellido,
-      segundoApellido: estudianteData.segundoApellido,
-      primerNombre: estudianteData.primerNombre,
-      segundoNombre: estudianteData.segundoNombre,
-      correoElectronico: estudianteData.correoElectronico,
-      numeroTelefonico: estudianteData.numeroTelefonico,
-      password: estudianteData.password,
+    const docenteDataToSend = {
+      numeroDocumento: docenteData.numeroDocumento,
+      primerApellido: docenteData.primerApellido,
+      segundoApellido: docenteData.segundoApellido,
+      primerNombre: docenteData.primerNombre,
+      segundoNombre: docenteData.segundoNombre,
+      correoElectronico: docenteData.correoElectronico,
+      numeroTelefonico: docenteData.numeroTelefonico,
+      password: docenteData.password,
     };
 
     if (editing) {
-      EstudianteService.updateEstudiante(id, estudianteDataToSend)
+      DocentesService.updateDocente(id, docenteDataToSend)
         .then((response) => {
-          console.log("Estudiante actualizado con éxito", response.data);
-          navigate("/estudiantes");
+          console.log("Docente actualizado con éxito", response.data);
+          navigate("/docentes");
         })
         .catch((error) => {
-          console.error("Error al actualizar el estudiante", error);
+          console.error("Error al actualizar el docente", error);
         });
     } else {
-      EstudianteService.createEstudiante(estudianteDataToSend)
+      DocentesService.createDocente(docenteDataToSend)
         .then((response) => {
-          console.log("Estudiante creado con éxito", response.data);
-          navigate("/login-estudiante");
+          console.log("Docente creado con éxito", response.data);
+          navigate("/login-docente");
         })
         .catch((error) => {
-          console.error("Error al crear el estudiante", error);
+          console.error("Error al crear el docente", error);
         });
     }
   };
 
   return (
-    <div className="container">
-      <Header />
-
-      <div className="form-container">
-        <div className="back-button">
-          <Link to="/login-estudiante" className="btn btn-info">
+    <div>
+      <Header/>
+      <div className="col-md-6">
+        <div>
+          <Link to="/login-docente" className="btn btn-info mt-3 mb-5">
             ← Volver
           </Link>
         </div>
-        <h2 className="form-title">{editing ? "Editar Estudiante" : "Crear Estudiante"}</h2>
-        <form className="form" onSubmit={handleSubmit}>
+        <h2>{editing ? "Editar Docente" : "Crear Docente"}</h2>
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Número de Documento:</label>
             <input
               type="text"
               className="form-control"
               name="numeroDocumento"
-              value={estudianteData.numeroDocumento}
+              value={docenteData.numeroDocumento}
               onChange={handleInputChange}
               required
             />
@@ -116,7 +113,7 @@ function CrearEditarEstudiante() {
               type="text"
               className="form-control"
               name="primerApellido"
-              value={estudianteData.primerApellido}
+              value={docenteData.primerApellido}
               onChange={handleInputChange}
               required
             />
@@ -127,7 +124,7 @@ function CrearEditarEstudiante() {
               type="text"
               className="form-control"
               name="segundoApellido"
-              value={estudianteData.segundoApellido}
+              value={docenteData.segundoApellido}
               onChange={handleInputChange}
             />
           </div>
@@ -137,7 +134,7 @@ function CrearEditarEstudiante() {
               type="text"
               className="form-control"
               name="primerNombre"
-              value={estudianteData.primerNombre}
+              value={docenteData.primerNombre}
               onChange={handleInputChange}
               required
             />
@@ -148,7 +145,7 @@ function CrearEditarEstudiante() {
               type="text"
               className="form-control"
               name="segundoNombre"
-              value={estudianteData.segundoNombre}
+              value={docenteData.segundoNombre}
               onChange={handleInputChange}
             />
           </div>
@@ -158,7 +155,7 @@ function CrearEditarEstudiante() {
               type="email"
               className="form-control"
               name="correoElectronico"
-              value={estudianteData.correoElectronico}
+              value={docenteData.correoElectronico}
               onChange={handleInputChange}
               required
             />
@@ -169,7 +166,7 @@ function CrearEditarEstudiante() {
               type="text"
               className="form-control"
               name="numeroTelefonico"
-              value={estudianteData.numeroTelefonico}
+              value={docenteData.numeroTelefonico}
               onChange={handleInputChange}
               required
             />
@@ -180,15 +177,14 @@ function CrearEditarEstudiante() {
               type="password"
               className="form-control"
               name="password"
-              value={estudianteData.password}
+              value={docenteData.password}
               onChange={handleInputChange}
               required={!editing}
             />
           </div>
-
           <div className="form-group mt-3 mb-3">
             <button type="submit" className="btn btn-primary mb-5">
-              {editing ? "Guardar Cambios" : "Crear Estudiante"}
+              {editing ? "Guardar Cambios" : "Crear Docente"}
             </button>
           </div>
         </form>
@@ -197,4 +193,4 @@ function CrearEditarEstudiante() {
   );
 }
 
-export default CrearEditarEstudiante;
+export default CrearEditarDocente;

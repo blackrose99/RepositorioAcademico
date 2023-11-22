@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import EstudiantesService from '../../Services/EstudianteServices'; // Ajusta la ruta según tu estructura de carpetas
 import { Link, useNavigate, useParams } from "react-router-dom";
-import "./LoginEstudiante.css"
+import "./Login.css"
 import Header from "../Globales/Header";
 
 function EstudianteLoginForm() {
