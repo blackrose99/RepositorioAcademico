@@ -87,113 +87,111 @@ function CrearEditarEstudiante() {
   };
 
   return (
-    <div>
+    <div className="container">
+      <Header />
 
-    <Header/>
-   
-    <div className="col-md-6">
-      <div>
-        <Link to="/login-estudiante" className="btn btn-info mt-3 mb-5">
-          ← Volver
-        </Link>
+      <div className="form-container">
+        <div className="back-button">
+          <Link to="/login-estudiante" className="btn btn-info">
+            ← Volver
+          </Link>
+        </div>
+        <h2 className="form-title">{editing ? "Editar Estudiante" : "Crear Estudiante"}</h2>
+        <form className="form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label>Número de Documento:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="numeroDocumento"
+              value={estudianteData.numeroDocumento}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Primer Apellido:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="primerApellido"
+              value={estudianteData.primerApellido}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Segundo Apellido:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="segundoApellido"
+              value={estudianteData.segundoApellido}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <label>Primer Nombre:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="primerNombre"
+              value={estudianteData.primerNombre}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Segundo Nombre:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="segundoNombre"
+              value={estudianteData.segundoNombre}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="form-group">
+            <label>Correo Electrónico:</label>
+            <input
+              type="email"
+              className="form-control"
+              name="correoElectronico"
+              value={estudianteData.correoElectronico}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Número Telefónico:</label>
+            <input
+              type="text"
+              className="form-control"
+              name="numeroTelefonico"
+              value={estudianteData.numeroTelefonico}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label>Contraseña:</label>
+            <input
+              type="password"
+              className="form-control"
+              name="password"
+              value={estudianteData.password}
+              onChange={handleInputChange}
+              required={!editing}
+            />
+          </div>
+
+          <div className="form-group mt-3 mb-3">
+            <button type="submit" className="btn btn-primary mb-5">
+              {editing ? "Guardar Cambios" : "Crear Estudiante"}
+            </button>
+          </div>
+        </form>
       </div>
-      <h2>{editing ? "Editar Estudiante" : "Crear Estudiante"}</h2>
-      <form onSubmit={handleSubmit}>
-
-        <div className="form-group">
-          <label>Número de Documento:</label>
-          <input
-            type="text"
-            className="form-control"
-            name="numeroDocumento"
-            value={estudianteData.numeroDocumento}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Primer Apellido:</label>
-          <input
-            type="text"
-            className="form-control"
-            name="primerApellido"
-            value={estudianteData.primerApellido}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Segundo Apellido:</label>
-          <input
-            type="text"
-            className="form-control"
-            name="segundoApellido"
-            value={estudianteData.segundoApellido}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label>Primer Nombre:</label>
-          <input
-            type="text"
-            className="form-control"
-            name="primerNombre"
-            value={estudianteData.primerNombre}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Segundo Nombre:</label>
-          <input
-            type="text"
-            className="form-control"
-            name="segundoNombre"
-            value={estudianteData.segundoNombre}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="form-group">
-          <label>Correo Electrónico:</label>
-          <input
-            type="email"
-            className="form-control"
-            name="correoElectronico"
-            value={estudianteData.correoElectronico}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Número Telefónico:</label>
-          <input
-            type="text"
-            className="form-control"
-            name="numeroTelefonico"
-            value={estudianteData.numeroTelefonico}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Contraseña:</label>
-          <input
-            type="password"
-            className="form-control"
-            name="password"
-            value={estudianteData.password}
-            onChange={handleInputChange}
-            required={!editing}
-          />
-        </div>
-
-        <div className="form-group mt-3 mb-3">
-          <button type="submit" className="btn btn-primary mb-5">
-            {editing ? "Guardar Cambios" : "Crear Estudiante"}
-          </button>
-        </div>
-      </form>
-    </div>
     </div>
   );
 }
