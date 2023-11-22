@@ -8,7 +8,7 @@ import LoginEstu from "./Componentes/Login/LoginEstudiante"; // Importar el comp
 import StudentDashboard from "./Componentes/Estudiantes/PanelEstudiante"; // Componente del dashboard del estudiante
 import TeacherDashboard from "./Componentes/Docentes/PanelProfesor"; // Componente del dashboard del profesor
 import RegistroEstudiante from "./Componentes/Login/RegistroEstudiante";
-import CrearDocumento from './Componentes/Docentes/DocumentosAdd';
+import CrearDocumento from './Componentes/Documentos/DocumentosAdd';
 import LoginDocente from "./Componentes/Login/LoginDocente";
 import RegistroDocente from "./Componentes/Login/RegistroDocente";
 
