@@ -1,23 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+// Componentes Principales
+import Home from "./Componentes/Globales/Home";
+import LoginEstu from "./Componentes/Login/LoginEstudiante"; // Importar el componente de inicio de sesión
+import StudentDashboard from "./Componentes/Estudiantes/PanelEstudiante"; // Componente del dashboard del estudiante
+import TeacherDashboard from "./Componentes/Docentes/PanelProfesor"; // Componente del dashboard del profesor
+import RegistroEstudiante from "./Componentes/Login/RegistroEstudiante";
+import CrearDocumento from './Componentes/Docentes/DocumentosAdd';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+      <BrowserRouter>
+        <div className="">
+          <Routes>
+            <Route path="/" element={<Home />} />
+
+            {/* Rutas para los Estudiantes */}
+            <Route path="/login-estudiante" element={<LoginEstu />} />
+            <Route path="/estudiantes/:id" element={<StudentDashboard />} /> {/* Ruta para el dashboard del estudiante */}
+            <Route path="/regitro-estudiante" element={<RegistroEstudiante />} /> {/* Ruta para el dashboard del estudiante */}
+
+            {/* Rutas para los Docentes */}
+            <Route path="/teacher" element={<TeacherDashboard />} /> {/* Ruta para el dashboard del profesor */}
+            {/*Rutas Para los Documentos   */}
+            <Route path="/crear-documento" element={<CrearDocumento />} /> {/* Ruta para el dashboard del profesor */}
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
