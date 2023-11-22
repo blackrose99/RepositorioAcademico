@@ -49,33 +49,6 @@ const PanelEstudiante = () => {
           Bienvenido, {estudiante.primerNombre} {estudiante.segundoNombre} {estudiante.primerApellido} {estudiante.segundoApellido}
         </h3>
       </div>
-
-      <div className="search-bar">
-        <input
-          type="text"
-          placeholder="Buscar en el repositorio..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <select value={anoFilter} onChange={(e) => setAnoFilter(e.target.value)}>
-          <option value="">Filtrar por año</option>
-          {/* Opciones de años */}
-        </select>
-        <select value={categoriaFilter} onChange={(e) => setCategoriaFilter(e.target.value)}>
-          <option value="">Filtrar por categoría</option>
-          {/* Opciones de categorías */}
-        </select>
-        <button onClick={handleSearch}>Buscar por Nombre</button>
-        <button onClick={handleFilterByAno}>Filtrar por Año</button>
-        <button onClick={handleFilterByCategoria}>Filtrar por Categoría</button>
-      </div>
-
-      {/* Aquí puedes mostrar la lista de documentos */}
-      <ul>
-        {documentos.map((documento) => (
-          <li key={documento.id}>{documento.nombre}</li>
-        ))}
-      </ul>
     </div>
   );
 };
