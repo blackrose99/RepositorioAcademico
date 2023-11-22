@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import EstudianteService from "../../Services/EstudianteServices";
 import Header from "../Globales/Header";
-import "./RegistroEstudiante.css"; // Archivo CSS para estilos
 import "./Registro.css";
 
 function CrearEditarEstudiante() {
