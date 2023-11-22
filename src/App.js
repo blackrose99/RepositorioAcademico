@@ -9,6 +9,8 @@ import StudentDashboard from "./Componentes/Estudiantes/PanelEstudiante"; // Com
 import TeacherDashboard from "./Componentes/Docentes/PanelProfesor"; // Componente del dashboard del profesor
 import RegistroEstudiante from "./Componentes/Login/RegistroEstudiante";
 import CrearDocumento from './Componentes/Docentes/DocumentosAdd';
+import LoginDocente from "./Componentes/Login/LoginDocente";
+import RegistroDocente from "./Componentes/Login/RegistroDocente";
 
 
 
@@ -22,8 +24,12 @@ function App() {
 
             {/* Rutas para los Estudiantes */}
             <Route path="/login-estudiante" element={<LoginEstu />} />
+            <Route path="/login-docente" element={<LoginDocente />} />
+
             <Route path="/estudiantes/:id" element={<StudentDashboard />} /> {/* Ruta para el dashboard del estudiante */}
+          
             <Route path="/regitro-estudiante" element={<RegistroEstudiante />} /> {/* Ruta para el dashboard del estudiante */}
+            <Route path="/regitro-docente" element={<RegistroDocente />} /> 
 
             {/* Rutas para los Docentes */}
             <Route path="/teacher" element={<TeacherDashboard />} /> {/* Ruta para el dashboard del profesor */}

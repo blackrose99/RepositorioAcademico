@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import EstudianteService from "../../Services/EstudianteServices";
 import Header from "../Globales/Header";
+import "./Registro.css";
 
 function CrearEditarEstudiante() {
   const [estudianteData, setEstudianteData] = useState({
