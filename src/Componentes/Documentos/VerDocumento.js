@@ -34,21 +34,25 @@ const VerDocumento = () => {
   }, [documentoId]);
 
   const handleDownload = async () => {
-    if (documento && documento.archivo) {
-      try {
-        const file = base64ToFile(documento.archivo, documento.nombre || 'archivo');
-        const url = URL.createObjectURL(file);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = file.name;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      } catch (error) {
-        console.error('Error al decodificar y descargar el archivo:', error);
+    const base64String = documento.archivo; 
+    console.log('Valor de documento.archivo:', base64String);
+  
+    try {
+      const decodedData = atob(base64String);
+      const byteCharacters = new Uint8Array(decodedData.length);
+      for (let i = 0; i < decodedData.length; i++) {
+        byteCharacters[i] = decodedData.charCodeAt(i);
       }
+      const blob = new Blob([byteCharacters], { type: 'application/pdf' });
+  
+      const pdfUrl = URL.createObjectURL(blob);
+      window.open(pdfUrl, '_blank');
+    } catch (error) {
+      console.error('Error al decodificar y mostrar el archivo PDF:', error);
     }
   };
+  
+
 
   if (error) {
     return <div>Error al obtener el documento: {error.message}</div>;

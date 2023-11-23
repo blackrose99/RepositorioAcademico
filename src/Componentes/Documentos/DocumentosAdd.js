@@ -5,7 +5,7 @@ import HeaderDocente from '../Docentes/HeaderDocente';
 
 const CrearDocumento = () => {
   const { id: docenteId } = useParams();
-  const navigate = useNavigate(); // Agrega esta línea
+  const navigate = useNavigate();
 
   const [documentoData, setDocumentoData] = useState({
     nombre: '',
@@ -39,6 +39,18 @@ const CrearDocumento = () => {
     });
   };
 
+  const handleBase64Generation = () => {
+    try {
+      // Obtener el contenido base64 del archivo
+      const base64String = documentoData.archivo;
+
+      // Mostrar la cadena base64 en el área de texto
+      document.getElementById('base64ofFile').value = base64String;
+    } catch (error) {
+      console.error('Error al generar la cadena base64:', error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -61,7 +73,6 @@ const CrearDocumento = () => {
       console.error('Error al enviar el formulario:', error);
     }
   };
-
   return (
     <div className='container'>
       <HeaderDocente/>
