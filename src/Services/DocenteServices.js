@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 const DOCENTES_BASE_REST_API_URL = 'http://localhost:8082/api/docentes/';
+const DOCENTES_BASE_REST_API_URL2 = 'http://localhost:8082/api/docentes/documentos';
+
 
 class DocentesService {
   getAllDocentes() {
@@ -45,20 +47,15 @@ class DocentesService {
     return axios.get(DOCENTES_BASE_REST_API_URL + 'documentos');
   }
 
-  // Método para crear un documento por un docente
-  crearDocumento(docenteId, documentoData) {
-    return axios.post(`${DOCENTES_BASE_REST_API_URL}${docenteId}/documentos`, documentoData);
-  }
-
   // metodo para crear un documento desde un formulario
   createDocente(docenteData) {
     return axios.post(DOCENTES_BASE_REST_API_URL + 'documentos', docenteData);
   }
   
   // Método para obtener un documento por su ID
-  getDocumentoById(docenteId, documentoId) {
-    return axios.get(`${DOCENTES_BASE_REST_API_URL}${docenteId}/documentos/${documentoId}`);
-  }
+  getDocumentById = async (documentoId) => {
+    return axios.get(`${DOCENTES_BASE_REST_API_URL2}/${documentoId}`);
+  };
 }
 
 export default new DocentesService();
