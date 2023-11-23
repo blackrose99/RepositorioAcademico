@@ -1,119 +1,90 @@
-import React, { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';  // Cambié useHistory por useNavigate
+import React, { useState, useEffect } from 'react';
 import DocentesService from '../../Services/DocenteServices';
+import { useParams } from 'react-router-dom';
 
 const CrearDocumento = () => {
-    const { id } = useParams();
-    const navigate = useNavigate();  // Cambié useHistory por useNavigate
-  
-    // Estados para los datos del documento y el archivo
-    const [nombre, setNombre] = useState('');
-    const [categoria, setCategoria] = useState('');
-    const [autor, setAutor] = useState('');
-    const [descripcion, setDescripcion] = useState('');
-    const [fechaPublicacion, setFechaPublicacion] = useState('');
-    const [archivo, setArchivo] = useState(null);
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-  
-      try {
-        // Convierte la fecha a un formato compatible con el servidor (puedes ajustar esto según tu necesidad)
-        const fechaFormateada = new Date(fechaPublicacion).toISOString();
-  
-        // Lee el contenido del archivo como un array de bytes
-        const archivoBinario = await leerArchivoComoBinario(archivo);
-  
-        // Crea un objeto con los datos del documento y el archivo en formato binario
-        const documentoData = {
-          nombre,
-          categoria,
-          autor,
-          descripcion,
-          fechaPublicacion: fechaFormateada,
-          archivo: archivoBinario,
-          docentes: [
-            {
-              id: id
-            }
-          ]
-        };
-  
-        // Llama al método del servicio para crear el documento
-        const response = await DocentesService.crearDocumento(documentoData);
-  
-        // Maneja la respuesta según sea necesario
-        console.log('Documento creado:', response.data);
-  
-        // Redirige a otra página
-        navigate('/otra-pagina');  // Cambié history.push por navigate
-  
-        // Limpia los campos del formulario
-        limpiarCampos();
-  
-      } catch (error) {
-        // Maneja los errores
-        console.error('Error al crear el documento:', error.message);
-      }
-    };
-  
-    const handleFileChange = (e) => {
-      // Actualiza el estado del archivo al seleccionar un nuevo archivo
-      setArchivo(e.target.files[0]);
-    };
-  
-    const leerArchivoComoBinario = (file) => {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-  
-        reader.onload = (event) => {
-          // El contenido del archivo se almacena en event.target.result
-          resolve(event.target.result);
-        };
-  
-        reader.onerror = (error) => {
-          reject(error);
-        };
-  
-        reader.readAsArrayBuffer(file);
+  const { id: docenteId } = useParams(); // Obtén el ID del docente desde los parámetros de la URL
+
+  const [documentoData, setDocumentoData] = useState({
+    nombre: '',
+    categoria: '',
+    autor: '',
+    descripcion: '',
+    fechaPublicacion: '',
+    archivoBase64: '',
+  });
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      const base64String = reader.result.split(',')[1];
+      setDocumentoData({
+        ...documentoData,
+        archivoBase64: base64String,
       });
     };
-  
-    const limpiarCampos = () => {
-      setNombre('');
-      setCategoria('');
-      setAutor('');
-      setDescripcion('');
-      setFechaPublicacion('');
-      setArchivo(null);
-    };
-  
-    return (
-      <div>
-        <h2>Crear Nuevo Documento</h2>
-        <form onSubmit={handleSubmit}>
-          <label>Nombre del Documento:</label>
-          <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
-  
-          <label>Categoría del Documento:</label>
-          <input type="text" value={categoria} onChange={(e) => setCategoria(e.target.value)} required />
-  
-          <label>Autor del Documento:</label>
-          <input type="text" value={autor} onChange={(e) => setAutor(e.target.value)} required />
-  
-          <label>Descripción del Documento:</label>
-          <textarea value={descripcion} onChange={(e) => setDescripcion(e.target.value)} required />
-  
-          <label>Fecha de Publicación:</label>
-          <input type="datetime-local" value={fechaPublicacion} onChange={(e) => setFechaPublicacion(e.target.value)} required />
-  
-          <label>Archivo:</label>
-          <input type="file" onChange={handleFileChange}  />
-  
-          <button type="submit">Crear Documento</button>
-        </form>
-      </div>
-    );
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setDocumentoData({
+      ...documentoData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log('Valores antes de la llamada a la API:', documentoData);
+
+    try {
+      const documentoDataToSend = {
+        ...documentoData,
+        docentes: [{ id: docenteId }],
+      };
+
+      // Llama al servicio para crear el documento
+      const response = await DocentesService.createDocente(documentoDataToSend);
+
+      console.log('Respuesta del servidor:', response.data);
+      // Puedes redirigir o realizar otras acciones después de crear el documento
+    } catch (error) {
+      console.error('Error al enviar el formulario:', error);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Crear Nuevo Documento</h2>
+      <form onSubmit={handleSubmit}>
+        <label>Nombre del Documento:</label>
+        <input type="text" name="nombre" value={documentoData.nombre} onChange={handleInputChange} required />
+
+        <label>Categoría del Documento:</label>
+        <input type="text" name="categoria" value={documentoData.categoria} onChange={handleInputChange} required />
+
+        <label>Autor del Documento:</label>
+        <input type="text" name="autor" value={documentoData.autor} onChange={handleInputChange} required />
+
+        <label>Descripción del Documento:</label>
+        <textarea name="descripcion" value={documentoData.descripcion} onChange={handleInputChange} required />
+
+        <label>Fecha de Publicación:</label>
+        <input type="datetime-local" name="fechaPublicacion" value={documentoData.fechaPublicacion} onChange={handleInputChange} required />
+
+        <label>Archivo:</label>
+        <input type="file" onChange={handleFileChange} />
+
+        <button type="submit">Crear Documento</button>
+      </form>
+    </div>
+  );
 };
 
 export default CrearDocumento;

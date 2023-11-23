@@ -32,9 +32,12 @@ function App() {
             <Route path="/regitro-docente" element={<RegistroDocente />} /> 
 
             {/* Rutas para los Docentes */}
-            <Route path="/teacher" element={<TeacherDashboard />} /> {/* Ruta para el dashboard del profesor */}
+            <Route path="/docentes/:id" element={<TeacherDashboard />} /> {/* Ruta para el dashboard del profesor */}
+           
             {/*Rutas Para los Documentos   */}
-            <Route path="/crear-documento" element={<CrearDocumento />} /> {/* Ruta para el dashboard del profesor */}
+          
+            <Route path="/crear-documento/:id" element={<CrearDocumento />} /> {/* Ruta para el dashboard del profesor */}
+       
           </Routes>
         </div>
       </BrowserRouter>

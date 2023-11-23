@@ -20,7 +20,7 @@ function EstudianteLoginForm() {
       console.log('Inicio de sesión exitoso. Datos del docente:', docenteData);
 
       // Redirigir a la página después de iniciar sesión (ajusta la ruta según tu aplicación)
-      navigate(`/docentes/${docenteData.id}`);
+      navigate(`/docentes/${docenteData}`);
     } catch (error) {
       setError('Inicio de sesión fallido. Verifica tus credenciales.');
     }
