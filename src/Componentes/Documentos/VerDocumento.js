@@ -2,62 +2,88 @@ import React, { useState, useEffect } from 'react';
 import DocentesService from '../../Services/DocenteServices';
 import { useParams } from 'react-router-dom';
 
-const DetalleDocumento = () => {
-  const { documentoId } = useParams();
+function base64ToFile(base64String, fileName) {
+  const byteCharacters = atob(base64String);
+  const byteNumbers = new Array(byteCharacters.length);
+  for (let i = 0; i < byteCharacters.length; i++) {
+    byteNumbers[i] = byteCharacters.charCodeAt(i);
+  }
+  const byteArray = new Uint8Array(byteNumbers);
+  const blob = new Blob([byteArray], { type: 'application/pdf' });
+  const file = new File([blob], fileName, { type: 'application/pdf' });
+  return file;
+}
+
+const VerDocumento = () => {
+  const { id: documentoId } = useParams();
   const [documento, setDocumento] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchDocumentoById = async () => {
+    const fetchDocumento = async () => {
       try {
-        const response = await DocentesService.getDocumentoById(documentoId);
+        const response = await DocentesService.getDocumentById(documentoId);
         setDocumento(response.data);
       } catch (error) {
-        console.error('Error al obtener la información del documento:', error);
-  
-        if (error.response) {
-          console.log('Respuesta completa del servidor:', error.response);
-          setError('Error en la respuesta del servidor');
-        } else if (error.request) {
-          console.log('No se recibió respuesta del servidor');
-          setError('No se recibió respuesta del servidor');
-        } else {
-          console.log('Error en la configuración de la solicitud', error.message);
-          setError('Error en la configuración de la solicitud');
-        }
-      } finally {
-        setLoading(false);
+        console.error('Error al obtener el documento:', error);
+        setError(error);
       }
     };
-  
-    fetchDocumentoById();
-  }, [documentoId]);
-  
 
-  if (loading) {
-    return <p>Cargando...</p>;
-  }
+    fetchDocumento();
+  }, [documentoId]);
+
+  const handleDownload = async () => {
+    if (documento && documento.archivo) {
+      try {
+        const file = base64ToFile(documento.archivo, documento.nombre || 'archivo');
+        const url = URL.createObjectURL(file);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = file.name;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } catch (error) {
+        console.error('Error al decodificar y descargar el archivo:', error);
+      }
+    }
+  };
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <div>Error al obtener el documento: {error.message}</div>;
   }
 
   if (!documento) {
-    return <p>No se encontró el documento.</p>;
+    return <div>Cargando...</div>;
   }
 
   return (
     <div className='container'>
-      <h2>Detalle del Documento</h2>
-      <p><strong>Nombre:</strong> {documento.nombre}</p>
-      <p><strong>Categoría:</strong> {documento.categoria}</p>
-      <p><strong>Autor:</strong> {documento.autor}</p>
-      <p><strong>Descripción:</strong> {documento.descripcion}</p>
-      <p><strong>Fecha de Publicación:</strong> {documento.fechaPublicacion}</p>
-      {/* Agrega más detalles según sea necesario */}
+      <h2>Detalles del Documento</h2>
+      <div>
+        <strong>Nombre:</strong> {documento.nombre}
+      </div>
+      <div>
+        <strong>Categoría:</strong> {documento.categoria}
+      </div>
+      <div>
+        <strong>Autor:</strong> {documento.autor}
+      </div>
+      <div>
+        <strong>Descripción:</strong> {documento.descripcion}
+      </div>
+      <div>
+        <strong>Fecha de Publicación:</strong> {documento.fechaPublicacion}
+      </div>
+      <div>
+        <strong>Docentes:</strong> {documento.docentes.map(docente => docente.primerNombre + ' ' + docente.primerApellido).join(', ')}
+      </div>
+      <div>
+        <button onClick={handleDownload}>Descargar Archivo</button>
+      </div>
     </div>
   );
 };
 
-export default DetalleDocumento;
+export default VerDocumento;
