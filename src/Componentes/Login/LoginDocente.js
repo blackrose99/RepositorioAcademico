@@ -3,7 +3,6 @@ import DocentesService from '../../Services/DocenteServices'; // Ajusta la ruta 
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css"
 import Header from "../Globales/Header";
-import bglogin from "./ImgLogin/bg.jpg"
 
 function EstudianteLoginForm() {
   const [correoElectronico, setCorreoElectronico] = useState('');
@@ -28,7 +27,7 @@ function EstudianteLoginForm() {
   };
 
   return (
-    <div className='fondo'>
+    <div className='fondo1'>
       <Header />
 
       <div class="login-container">

@@ -144,16 +144,15 @@ p {
   width: 300px; /* Ancho deseado del contenedor */
 }
 
-.fondo {
+.fondo1 {
   background-image: url('../Login/ImgLogin/bg.jpg');
   background-size: cover; /* Para cubrir todo el contenedor */
   background-position: center; /* Centrar la imagen */
-  /* Otros estilos según tu preferencia */
-  /* Por ejemplo: */
-  height: 100vh; /* Altura igual al 100% de la ventana */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white; /* Cambiar color del texto para mejor visibilidad */
-  /* ... */
+ 
+}
+
+.fondo2 {
+  background-image: url('../Login/ImgLogin/Bg2.jpg');
+  background-size: cover; /* Para cubrir todo el contenedor */
+  background-position: center; /* Centrar la imagen */
 }

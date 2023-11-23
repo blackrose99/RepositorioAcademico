@@ -27,7 +27,7 @@ function EstudianteLoginForm() {
   };
 
   return (
-    <div>
+    <div className='fondo2'>
       <Header />
 
       <div class="login-container">
