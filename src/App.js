@@ -11,6 +11,7 @@ import RegistroEstudiante from "./Componentes/Login/RegistroEstudiante";
 import CrearDocumento from './Componentes/Documentos/DocumentosAdd';
 import LoginDocente from "./Componentes/Login/LoginDocente";
 import RegistroDocente from "./Componentes/Login/RegistroDocente";
+import VerDocumento from "./Componentes/Documentos/VerDocumento"
 
 
 
@@ -37,7 +38,7 @@ function App() {
             {/*Rutas Para los Documentos   */}
           
             <Route path="/crear-documento/:id" element={<CrearDocumento />} /> {/* Ruta para el dashboard del profesor */}
-       
+            <Route path='ver-documento/:id' element={<VerDocumento/>}></Route>
           </Routes>
         </div>
       </BrowserRouter>

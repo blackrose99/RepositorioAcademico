@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import DocentesService from "../../Services/DocenteServices";
-import { useParams ,Link} from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+import HeaderDocente from "./HeaderDocente";
+import Footer from "../Globales/Footer";
+import ListaDocumentos from "../Documentos/DocumentList";
+
 
 const PanelEstudiante = () => {
   const { id } = useParams();
@@ -23,23 +27,17 @@ const PanelEstudiante = () => {
 
   return (
     <div>
-
-    <div className="student-panel-container col-md-6">
-      <div className="container1">
-        <h3 className="name-nombre">
-          Bienvenido, {docente.primerNombre} {docente.segundoNombre} {docente.primerApellido} {docente.segundoApellido}
-        </h3>
+      <HeaderDocente />
+      <div className="container">
+        <h1 className="titulo">{docente.primerNombre} {docente.segundoNombre} {docente.primerApellido} {docente.segundoApellido}</h1>
+        <p className="descripcion">{docente.descripcion}</p>
       </div>
-    </div>
-        <div>
 
-     <Link to={`/crear-documento/${docente.id}`} className="btn btn-info mt-3 mb-5">
-  Publicar +
-    </Link>
-
-
-        </div>
-     
+      <div className="containern">
+        <h1>Barra de Busqueda</h1>
+        <ListaDocumentos />
+      </div>
+      <Footer />
     </div>
   );
 };

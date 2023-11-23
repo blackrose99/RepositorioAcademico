@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import DocentesService from "../../Services/DocenteServices"; // Ajusta la ruta según tu estructura de carpetas
 import Header from "../Globales/Header";
+import Footer from "../Globales/Footer";
 import "./Registro.css";
 
 
@@ -189,6 +190,7 @@ function CrearEditarDocente() {
           </div>
         </form>
       </div>
+      <Footer/>
     </div>
   );
 }

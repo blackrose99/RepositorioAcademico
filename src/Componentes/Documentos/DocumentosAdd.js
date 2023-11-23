@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import DocentesService from '../../Services/DocenteServices';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import HeaderDocente from '../Docentes/HeaderDocente';
 
 const CrearDocumento = () => {
-  const { id: docenteId } = useParams(); // Obtén el ID del docente desde los parámetros de la URL
+  const { id: docenteId } = useParams();
+  const navigate = useNavigate(); // Agrega esta línea
 
   const [documentoData, setDocumentoData] = useState({
     nombre: '',
@@ -11,7 +13,7 @@ const CrearDocumento = () => {
     autor: '',
     descripcion: '',
     fechaPublicacion: '',
-    archivoBase64: '',
+    archivo: '',
   });
 
   const handleFileChange = (e) => {
@@ -19,11 +21,10 @@ const CrearDocumento = () => {
     const reader = new FileReader();
 
     reader.onloadend = () => {
-      const base64String = reader.result.split(',')[1];
-      setDocumentoData({
-        ...documentoData,
-        archivoBase64: base64String,
-      });
+      setDocumentoData((prevData) => ({
+        ...prevData,
+        archivo: reader.result.split(',')[1],
+      }));
     };
 
     if (file) {
@@ -53,21 +54,31 @@ const CrearDocumento = () => {
       const response = await DocentesService.createDocente(documentoDataToSend);
 
       console.log('Respuesta del servidor:', response.data);
-      // Puedes redirigir o realizar otras acciones después de crear el documento
+
+      // Redirige a la ruta deseada
+      navigate(`/docentes/${docenteId}`);
     } catch (error) {
       console.error('Error al enviar el formulario:', error);
     }
   };
 
   return (
-    <div>
+    <div className='container'>
+      <HeaderDocente/>
       <h2>Crear Nuevo Documento</h2>
       <form onSubmit={handleSubmit}>
         <label>Nombre del Documento:</label>
         <input type="text" name="nombre" value={documentoData.nombre} onChange={handleInputChange} required />
 
         <label>Categoría del Documento:</label>
-        <input type="text" name="categoria" value={documentoData.categoria} onChange={handleInputChange} required />
+<select name="categoria" value={documentoData.categoria} onChange={handleInputChange} required>
+  <option value="">Selecciona una categoría</option>
+  <option value="Tecnologia">Tecnología</option>
+  <option value="Ciencia">Ciencia</option>
+  <option value="Arte">Arte</option>
+  <option value="Historia">Historia</option>
+  <option value="Otros">Otros</option>
+</select>
 
         <label>Autor del Documento:</label>
         <input type="text" name="autor" value={documentoData.autor} onChange={handleInputChange} required />

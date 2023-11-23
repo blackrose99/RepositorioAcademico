@@ -3,6 +3,7 @@ import EstudiantesService from '../../Services/EstudianteServices'; // Ajusta la
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./Login.css"
 import Header from "../Globales/Header";
+import Footer from '../Globales/Footer';
 
 
 function EstudianteLoginForm() {
@@ -61,6 +62,7 @@ function EstudianteLoginForm() {
           </div>
         </form>
       </div>
+      <Footer/>
     </div>
   );
 }
