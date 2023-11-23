@@ -1,5 +1,3 @@
-// EstudianteService.js
-
 import axios from 'axios';
 
 const ESTUDIANTES_BASE_REST_API_URL = 'http://localhost:8082/api/estudiantes/';
@@ -42,24 +40,15 @@ class EstudiantesService {
     }
   }
 
+  // Método para obtener todos los documentos
+  getAllDocumentos() {
+    return axios.get(ESTUDIANTES_BASE_REST_API_URL + 'documentos');
+  }
 
-//Aqui van los metodos para llamar la api de los Documetos 
-getAllDocumentos() {
-  return axios.get(ESTUDIANTES_BASE_REST_API_URL + 'documentos');
-}
-
-getDocumentosPorNombre(nombre) {
-  return axios.get(ESTUDIANTES_BASE_REST_API_URL + `documentos-por-nombre/${nombre}`);
-}
-
-getDocumentosPorAno(ano) {
-  return axios.get(ESTUDIANTES_BASE_REST_API_URL + `por-ano/${ano}`);
-}
-
-getDocumentosPorCategoria(categoria) {
-  return axios.get(ESTUDIANTES_BASE_REST_API_URL + `documentos-por-categoria/${categoria}`);
-}
-
+  // Método para obtener un documento por su ID
+  getDocumentoById(docenteId, documentoId) {
+    return axios.get(`${ESTUDIANTES_BASE_REST_API_URL}${docenteId}/documentos/${documentoId}`);
+  }
 }
 
 export default new EstudiantesService();
