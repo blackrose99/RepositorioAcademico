@@ -27,38 +27,41 @@ function EstudianteLoginForm() {
   };
 
   return (
-    <div>
-      <Header/>
-      
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleLogin}>
-        <label>
-          Correo Electrónico:
-          <input
-            type="text"
-            value={correoElectronico}
-            onChange={(e) => setCorreoElectronico(e.target.value)}
-          />
-        </label>
-        <br />
-        <label>
-          Contraseña:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <br />
-        <button type="submit">Iniciar Sesión</button>
-      </form>
-      {error && <p>{error}</p>}
-      <div>
-        <Link to="/regitro-docente" className="btn btn-info mt-3 mb-5">
-          Crear Cuenta
-        </Link>
+    <div className='fondo1'>
+      <Header />
+
+      <div class="login-container">
+        <h2>Inicio de Sesión de Docentes</h2>
+        <form onSubmit={handleLogin}>
+          <label>
+            Correo Electrónico o Usuario:
+            <input
+              type="text"
+              value={correoElectronico}
+              onChange={(e) => setCorreoElectronico(e.target.value)}
+            />
+          </label>
+          <br />
+          <label>
+            Contraseña:
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </label>
+          <br />
+          <button type="submit">Iniciar Sesión</button>
+          {error && <p>{error}</p>}
+          <div>
+            <Link to="/regitro-docente" className="btn btn-info mt-3 mb-5">
+              Crear Cuenta
+            </Link>
+          </div>
+        </form>
       </div>
     </div>
+
   );
 }
 

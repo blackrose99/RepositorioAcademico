@@ -1,6 +1,112 @@
-/* Estilos para el formulario de inicio de sesión */
+/* Estilos para el contenedor principal */
+.cardLogin {
+  width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #E0E9FF; /* Azul más claro */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Efecto de sombra */
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
 
-/* Estilos generales */
+/* Estilos específicos para el modo estudiante */
+.estudiante {
+  background-color: #b3f7ff; /* Azul más oscuro */
+}
+
+/* Estilos específicos para el modo docente */
+.docente {
+  background-color: #7effdd; /* Azul aún más oscuro */
+}
+
+/* Estilos para los botones */
+button {
+  padding: 10px 20px;
+  margin: 10px 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button:hover {
+  background-color: #30b0c7; /* Azul más intenso al pasar el cursor */
+  color: #fff; /* Texto blanco al pasar el cursor */
+}
+
+/* Estilos para el formulario */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+label {
+  margin: 10px 0;
+}
+
+input {
+  padding: 8px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Estilos para la imagen */
+.image {
+  width: 200px;
+  height: 200px;
+  margin: 20px 0;
+}
+
+/* Animación para el cambio de tipo de usuario */
+.cardLogin {
+  transition: background-color 0.5s;
+}
+
+/* Estilos del interruptor */
+.switch-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.switch-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  background-color: #08ed13; /* Azul más oscuro */
+  color: #fff;
+  border: 2px solid rgb(0, 0, 0); /* Borde azul */
+}
+
+.switch-btn.active {
+  background-color: #dd640d; /* Azul aún más oscuro */
+}
+
+.switch-btn:first-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.switch-btn:last-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Animación del interruptor */
+.switch-btn.active {
+  transform: scale(1.08);
+}
+
+/* Estilos para el formulario de inicio de sesión */
 .container {
   padding: 20px;
   text-align: center;
@@ -11,40 +117,12 @@ h2 {
   margin-bottom: 20px;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-label {
-  margin-bottom: 10px;
-  display: block;
-}
-
-input[type="text"],
-input[type="password"] {
-  padding: 8px;
-  font-size: 16px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  width: 250px;
-  margin-bottom: 10px;
-}
-
 button[type="submit"] {
-  padding: 10px 20px;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
+  background-color: #3F51B5; /* Azul */
 }
 
 button[type="submit"]:hover {
-  background-color: #0056b3;
+  background-color: #303F9F; /* Azul más oscuro al pasar el cursor */
 }
 
 p {
@@ -53,14 +131,28 @@ p {
 }
 
 .btn-info {
-  padding: 10px 20px;
-  border-radius: 4px;
-  background-color: #17a2b8;
-  color: #fff;
-  text-decoration: none;
-  font-size: 16px;
+  background-color: #4CAF50; /* Verde */
 }
 
 .btn-info:hover {
-  background-color: #12829b;
+  background-color: #388E3C; /* Verde más oscuro al pasar el cursor */
+}
+
+.login-container {
+  text-align: center;
+  margin: 0 auto; /* Para centrar horizontalmente */
+  width: 300px; /* Ancho deseado del contenedor */
+}
+
+.fondo1 {
+  background-image: url('../Login/ImgLogin/bg.jpg');
+  background-size: cover; /* Para cubrir todo el contenedor */
+  background-position: center; /* Centrar la imagen */
+ 
+}
+
+.fondo2 {
+  background-image: url('../Login/ImgLogin/Bg2.jpg');
+  background-size: cover; /* Para cubrir todo el contenedor */
+  background-position: center; /* Centrar la imagen */
 }
