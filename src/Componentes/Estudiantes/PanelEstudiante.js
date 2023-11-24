@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import EstudianteService from "../../Services/EstudianteServices";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import VerDocumento from "../Documentos/DocumentList";
+import logo from '../Globales/img_G/logo-removebg-preview.png'; // Importa la imagen del logotipo
+import Footer from "../Globales/Footer"
+
 
 const PanelEstudiante = () => {
   const { id } = useParams();
@@ -43,13 +47,26 @@ const PanelEstudiante = () => {
   }
 
   return (
-    <div className="student-panel-container col-md-6">
-      <div className="container1">
-        <h3 className="name-nombre">
-          Bienvenido, {estudiante.primerNombre} {estudiante.segundoNombre} {estudiante.primerApellido} {estudiante.segundoApellido}
-        </h3>
+    <div>
+     <header className="header">
+    <div className="containerHeader">
+      <div className="logo">
+        <img src={logo} alt="Logo de la aplicación" />
+        <span className='tituloHeader'>{estudiante.primerNombre} {estudiante.segundoNombre} {estudiante.primerApellido} {estudiante.segundoApellido}</span>
       </div>
+      <nav>
+        <ul>
+        <li><Link to={"#"}>Home</Link></li>
+          <li><Link to={`/`}>Salir</Link></li>
+        </ul>
+      </nav>
     </div>
+  </header>
+        <VerDocumento/>
+        <Footer/>
+
+    </div>
+
   );
 };
 

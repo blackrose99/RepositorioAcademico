@@ -34,7 +34,7 @@ const PanelEstudiante = () => {
         <ul>
         <li><Link to={`/docentes/${docente.id}`}>Home</Link></li>
           <li><Link to={`/crear-documento/${docente.id}`}>Publicar +</Link></li>
-          <li><Link to={`/`}>Publicados</Link></li>
+          <li><Link to={`/publicados/${docente.id}`}>Publicados</Link></li>
           <li><Link to={`/`}>Salir</Link></li>
         </ul>
       </nav>

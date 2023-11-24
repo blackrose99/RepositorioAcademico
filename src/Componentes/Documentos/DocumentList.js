@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import DocentesService from '../../Services/DocenteServices';
 import { useParams, Link } from 'react-router-dom';
+import "./ListaDocumentos.css";
+import logo from '../Globales/img_G/unnamed.png'; // Importa la imagen del logotipo
+
 
 const ListaDocumentos = () => {
   const { id: docenteId } = useParams();
-  const [documentos, setDocumentos] = useState([]);
+  const [documentosOriginales, setDocumentosOriginales] = useState([]);
+  const [documentosFiltrados, setDocumentosFiltrados] = useState([]);
   const [filtroFecha, setFiltroFecha] = useState('');
   const [filtroCategoria, setFiltroCategoria] = useState('');
 
@@ -12,7 +16,9 @@ const ListaDocumentos = () => {
     const fetchDocumentos = async () => {
       try {
         const response = await DocentesService.getAllDocumentos(docenteId);
-        setDocumentos(response.data);
+        const documentosData = response.data;
+        setDocumentosOriginales(documentosData);
+        setDocumentosFiltrados(documentosData);
       } catch (error) {
         console.error('Error al obtener la lista de documentos:', error);
       }
@@ -47,33 +53,41 @@ const ListaDocumentos = () => {
 
   const filterDocuments = (searchText, fecha, categoria) => {
     // Filtrar documentos en base a los valores actuales de searchText, fecha y categoria
-    const documentosFiltrados = documentos.filter((documento) => {
+    const documentosFiltrados = documentosOriginales.filter((documento) => {
       const nombreMatch = documento.nombre.toLowerCase().includes(searchText);
-      const fechaMatch = !fecha || documento.fechaPublicacion.includes(fecha);
-      const categoriaMatch = !categoria || categoria === '' || documento.categoria === categoria;
-
+  
+      // Convertir la fecha de publicación a cadena antes de usar includes
+      const fechaMatch = !fecha || documento.fechaPublicacion.toString().includes(fecha);
+      
+      const categoriaMatch = !categoria || documento.categoria === categoria;
+  
       return nombreMatch && fechaMatch && categoriaMatch;
     });
-
-    setDocumentos(documentosFiltrados);
+  
+    setDocumentosFiltrados(documentosFiltrados);
   };
+  
+  
+
+const handleAnioChange = (e) => {
+  const anio = e.target.value;
+  setFiltroFecha(anio);
+  filterDocuments('', anio, filtroCategoria);
+};
+
+
 
   return (
     <div className='container'>
-      <div className="row">
-        <aside className="col-md-3">
-          <div className="input-group mb-4">
-            <input id="buscar" type="text" className="form-control" placeholder="Buscar documento..." onChange={handleSearchChange} />
-          </div>
+      <div className="input-group mb-4">
+        <input id="buscar" type="text" className="form-control" placeholder="Buscar documento..." onChange={handleSearchChange} />
+      </div>
 
-          <div className="mb-4">
-            <label>Filtrar por Fecha:</label>
-            <input type="date" onChange={handleFechaChange} />
-          </div>
-
+      <div className='row'>
+        <div className='col-md-3'>
           <div className="mb-4">
             <label>Filtrar por Categoría:</label>
-            <select onChange={handleCategoriaChange}>
+            <select className="form-control" onChange={handleCategoriaChange}>
               <option value="">Todas</option>
               <option value="Tecnologia">Tecnología</option>
               <option value="Ciencia">Ciencia</option>
@@ -82,30 +96,33 @@ const ListaDocumentos = () => {
               <option value="Otros">Otros</option>
             </select>
           </div>
-        </aside>
+          <div className="mb-4">
+            <label>Filtrar por Año:</label>
+            <select className="form-control" onChange={handleAnioChange}>
+              <option value="">Todos</option>
+              <option value="2019">2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+              <option value="2022">2022</option>
+              <option value="2023">2023</option>
+              {/* Agrega más años según sea necesario */}
+            </select>
+          </div>
+        </div>
 
-        <div className="col-md-9">
-          <h2>Lista de Documentos</h2>
+        <div className='col-md-9'>
           <table id="documentosTable" className="table mb-5">
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Categoría</th>
-                <th>Descripción</th>
-                <th>Fecha de Publicación</th>
-                <th>Ver Documento</th>
-              </tr>
-            </thead>
             <tbody>
-              {documentos.map((documento) => (
+              {documentosFiltrados.map((documento) => (
                 <tr key={documento.id}>
+                  <td>
+                    <Link to={`/ver-documento/${documento.id}`}>
+                      <img src={logo} alt={documento.nombre} className='pdf_img' />
+                    </Link>
+                  </td>
                   <td>{documento.nombre}</td>
-                  <td>{documento.categoria}</td>
                   <td>{truncateDescription(documento.descripcion, 50)}</td>
                   <td>{documento.fechaPublicacion}</td>
-                  <td>
-                    <Link to={`/ver-documento/${documento.id}`}>Ver</Link>
-                  </td>
                 </tr>
               ))}
             </tbody>

@@ -81,7 +81,7 @@ const VerDocumento = () => {
         <strong>Fecha de Publicación:</strong> {documento.fechaPublicacion}
       </div>
       <div>
-        <strong>Docentes:</strong> {documento.docentes.map(docente => docente.primerNombre + ' ' + docente.primerApellido).join(', ')}
+        <strong>Publicad Por El Docente:</strong> {documento.docentes.map(docente => docente.primerNombre + ' ' + docente.primerApellido).join(', ')}
       </div>
       <div>
         <button onClick={handleDownload}>Descargar Archivo</button>

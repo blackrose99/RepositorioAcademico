@@ -28,15 +28,7 @@ const PanelEstudiante = () => {
   return (
     <div>
       <HeaderDocente />
-      <div className="container">
-        <h1 className="titulo">{docente.primerNombre} {docente.segundoNombre} {docente.primerApellido} {docente.segundoApellido}</h1>
-        <p className="descripcion">{docente.descripcion}</p>
-      </div>
-
-      <div className="containern">
-        <h1>Barra de Busqueda</h1>
-        <ListaDocumentos />
-      </div>
+      <ListaDocumentos />
       <Footer />
     </div>
   );

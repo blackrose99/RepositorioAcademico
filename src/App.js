@@ -12,7 +12,8 @@ import CrearDocumento from './Componentes/Documentos/DocumentosAdd';
 import LoginDocente from "./Componentes/Login/LoginDocente";
 import RegistroDocente from "./Componentes/Login/RegistroDocente";
 import VerDocumento from "./Componentes/Documentos/VerDocumento"
-
+import Publicados from "./Componentes/Docentes/PublicadosList";
+import EditarDocumento from './Componentes/Documentos/DocumentoEdit';
 
 
 function App() {
@@ -36,8 +37,9 @@ function App() {
             <Route path="/docentes/:id" element={<TeacherDashboard />} /> {/* Ruta para el dashboard del profesor */}
            
             {/*Rutas Para los Documentos   */}
-          
-            <Route path="/crear-documento/:id" element={<CrearDocumento />} /> {/* Ruta para el dashboard del profesor */}
+            <Route path="/publicados/:id" element={<Publicados />} /> 
+            <Route path="/crear-documento/:id" element={<CrearDocumento />} /> 
+            <Route path="/editar-documento/:docenteId/:documentoId" element={<EditarDocumento />} />
             <Route path='ver-documento/:id' element={<VerDocumento/>}></Route>
           </Routes>
         </div>
