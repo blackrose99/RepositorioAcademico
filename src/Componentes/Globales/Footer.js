@@ -11,7 +11,6 @@ const Footer = () => {
             <p>Email: info@academic-hub.com</p>
           </div>
           <div className="col-md-6">
-            <h5>Enlaces Rápidos</h5>
             <ul>
               <li><a href="/terms">Términos y Condiciones</a></li>
               <li><a href="/privacy">Política de Privacidad</a></li>
