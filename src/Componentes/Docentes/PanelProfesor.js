@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import DocentesService from "../../Services/DocenteServices";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import HeaderDocente from "./HeaderDocente";
 import Footer from "../Globales/Footer";
 import ListaDocumentos from "../Documentos/DocumentList";
