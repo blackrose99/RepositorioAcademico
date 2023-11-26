@@ -80,10 +80,10 @@ const ListaDocumentos = () => {
                             {/* Asegúrate de que 'fechaPublicacion' sea un formato de fecha válido o ajusta según sea necesario */}
                             <td>{documento.fechaPublicacion}</td>
                             <td>
-                                <button onClick={() => handleEliminarDocumento(documento.id)}>Eliminar</button>
+                                <button onClick={() => handleEliminarDocumento(documento.id)} >Eliminar</button>
                             </td>
                             <td>
-                                <Link to={`/editar-documento/${docenteId}/${documento.id}`}>
+                                <Link to={`/editar-documento/${docenteId}/${documento.id}`} className='btn btn-primary'>
                                     Editar
                                 </Link>
 

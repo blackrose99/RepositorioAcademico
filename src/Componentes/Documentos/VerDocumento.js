@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import DocentesService from '../../Services/DocenteServices';
 import { useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilePdf, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import DocentesService from '../../Services/DocenteServices';
 import "./VerDocumento.css";
 import Modal from 'react-modal';
 import { RingLoader } from 'react-spinners';
@@ -13,19 +15,20 @@ const VerDocumento = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(true);
+  const [showDownloadAnimation, setShowDownloadAnimation] = useState(false);
+  const [showDownloadButton, setShowDownloadButton] = useState(true);
 
   useEffect(() => {
     const fetchDocumento = async () => {
       try {
         const response = await DocentesService.getDocumentById(documentoId);
         setDocumento(response.data);
-        setLoading(false); // Se establece como falso cuando el documento se carga
-        setModalIsOpen(false); // Cerrar el modal cuando el documento se carga
-
+        setLoading(false);
+        setModalIsOpen(false);
       } catch (error) {
         console.error('Error al obtener el documento:', error);
         setError(error);
-        setLoading(false); // También establece como falso en caso de error
+        setLoading(false);
       }
     };
 
@@ -34,7 +37,6 @@ const VerDocumento = () => {
 
   const handleDownload = async () => {
     const base64String = documento.archivo;
-    console.log('Valor de documento.archivo:', base64String);
 
     try {
       const decodedData = atob(base64String);
@@ -49,13 +51,24 @@ const VerDocumento = () => {
     } catch (error) {
       console.error('Error al decodificar y mostrar el archivo PDF:', error);
     }
+
+    setShowDownloadButton(false);
+
+    setTimeout(() => {
+      setShowDownloadAnimation(true);
+
+      setTimeout(() => {
+        setShowDownloadAnimation(false);
+        setShowDownloadButton(true);
+      }, 1000); // Ajusta el tiempo de acuerdo a la duración de la animación
+    }, 500); // Ajusta el tiempo de retardo antes de mostrar la animación
   };
 
   if (error) {
     return <div>Error al obtener el documento: {error.message}</div>;
   }
 
- if (loading) {
+  if (loading) {
     return (
       <Modal
         isOpen={modalIsOpen}
@@ -69,15 +82,15 @@ const VerDocumento = () => {
     );
   }
 
-
   if (!documento) {
     return <div>No se encontró el documento.</div>;
   }
+
   return (
     <div className='ver-documento-container'>
       <h2 className='ver-documento-title'>Detalles del Documento</h2>
       <div className='ver-documento-item'>
-        <strong>Nombre:</strong> {documento.nombre}
+        <FontAwesomeIcon icon={faFilePdf} /> <strong>Nombre:</strong> {documento.nombre}
       </div>
       <div className='ver-documento-item'>
         <strong>Categoría:</strong> {documento.categoria}
@@ -85,7 +98,7 @@ const VerDocumento = () => {
       <div className='ver-documento-item'>
         <strong>Autor:</strong> {documento.autor}
       </div>
-      <div className='ver-documento-item'>
+      <div className='ver-documento-item descripcion'>
         <strong>Descripción:</strong> {documento.descripcion}
       </div>
       <div className='ver-documento-item'>
@@ -97,7 +110,7 @@ const VerDocumento = () => {
       </div>
       <div className='ver-documento-item'>
         <button className='ver-documento-button' onClick={handleDownload}>
-          Descargar Archivo
+          <FontAwesomeIcon icon={faFilePdf} /> Descargar Archivo
         </button>
       </div>
     </div>

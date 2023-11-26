@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faPlus, faEye, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import DocentesService from "../../Services/DocenteServices";
-import { useParams ,Link} from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import logo from '../Globales/img_G/logo-removebg-preview.png'; // Importa la imagen del logotipo
-
 
 const PanelEstudiante = () => {
   const { id } = useParams();
@@ -25,21 +26,21 @@ const PanelEstudiante = () => {
 
   return (
     <header className="header">
-    <div className="containerHeader">
-      <div className="logo">
-        <img src={logo} alt="Logo de la aplicación" />
-        <span className='tituloHeader'>{docente.primerNombre} {docente.segundoNombre} {docente.primerApellido} {docente.segundoApellido}</span>
+      <div className="containerHeader">
+        <div className="logo">
+          <img src={logo} alt="Logo de la aplicación" />
+          <span className='tituloHeader'>{docente.primerNombre} {docente.segundoNombre} {docente.primerApellido} {docente.segundoApellido}</span>
+        </div>
+        <nav>
+          <ul>
+            <li><Link to={`/docentes/${docente.id}`}><FontAwesomeIcon icon={faHome} /> Home</Link></li>
+            <li><Link to={`/crear-documento/${docente.id}`}><FontAwesomeIcon icon={faPlus} /> Publicar</Link></li>
+            <li><Link to={`/publicados/${docente.id}`}><FontAwesomeIcon icon={faEye} /> Publicados</Link></li>
+            <li><Link to={`/`}><FontAwesomeIcon icon={faSignOutAlt} /> Salir</Link></li>
+          </ul>
+        </nav>
       </div>
-      <nav>
-        <ul>
-        <li><Link to={`/docentes/${docente.id}`}>Home</Link></li>
-          <li><Link to={`/crear-documento/${docente.id}`}>Publicar +</Link></li>
-          <li><Link to={`/publicados/${docente.id}`}>Publicados</Link></li>
-          <li><Link to={`/`}>Salir</Link></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    </header>
   );
 };
 
