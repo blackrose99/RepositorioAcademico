@@ -2,24 +2,12 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
-import BarraBusqueda from '../Bloques/BarraBusqueda';
 import "./Home.css"
 
 import imgEstudiantes from "../Globales/img_G/kids-1093758_1920.jpg";
 import imgDocetes from "../Globales/img_G/teacher-3765909_1920.jpg";
 
 const LandingPage = () => {
-  const navigate = useNavigate();
-
-  const handleSearch = () => {
-    const isLoggedIn = true; // Reemplazar con lógica de verificación de inicio de sesión
-    if (isLoggedIn) {
-      navigate('/search');
-    } else {
-      navigate('/login');
-    }
-  };
-
   return (
     <div>
       <Header />

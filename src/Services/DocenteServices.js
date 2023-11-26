@@ -15,7 +15,7 @@ class DocentesService {
     return axios.get(DOCENTES_BASE_REST_API_URL + id);
   }
 
-  createDocente(docenteData) {
+  createDocenteUsuario(docenteData) {
     return axios.post(DOCENTES_BASE_REST_API_URL, docenteData);
   }
 
@@ -48,10 +48,9 @@ class DocentesService {
   getAllDocumentos() {
     return axios.get(DOCENTES_BASE_REST_API_URL + 'documentos');
   }
-
-  // metodo para crear un documento desde un formulario
-  createDocente(docenteData) {
-    return axios.post(DOCENTES_BASE_REST_API_URL + 'documentos', docenteData);
+  // Método para crear un documento
+  createDocumento(docenteData) {
+    return axios.post(`${DOCENTES_BASE_REST_API_URL}documentos`, docenteData);
   }
   
   // Método para obtener un documento por su ID

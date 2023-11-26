@@ -1,0 +1,104 @@
+
+/* Añade estos estilos al archivo VerDocumento.css */
+
+.ver-documento-container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  animation: fadeIn 0.5s ease-in-out;
+  position: relative; /* Permite posicionar las líneas de forma absoluta dentro de este contenedor */
+}
+
+/* Líneas horizontales */
+.ver-documento-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #ccc;
+  background-image: repeating-linear-gradient(0deg, #ccc, #ccc 2px, transparent 2px, transparent 10px);
+}
+
+/* Líneas verticales */
+.ver-documento-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: #ccc;
+  background-image: repeating-linear-gradient(90deg, #ccc, #ccc 2px, transparent 2px, transparent 10px);
+}
+
+/* Resto de tus estilos... */
+
+.ver-documento-title {
+  color: #333;
+}
+
+.ver-documento-item {
+  margin-bottom: 10px;
+}
+
+.ver-documento-button {
+  padding: 10px;
+  background-color: #05a6f7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Estilo adicional para el campo de descripción */
+.ver-documento-item span {
+  background-color: #fff;
+  padding: 0 5px;
+  position: relative;
+  z-index: 1; /* Asegura que el contenido esté sobre las líneas */
+}
+
+.ver-documento-button:hover {
+  background-color: rgb(236, 26, 11)
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.1s ease-in-out;
+}
+
