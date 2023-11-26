@@ -27,14 +27,14 @@ const ListaDocumentos = () => {
     fetchDocumentos();
   }, [docenteId]);
 
-  const truncateDescription = (description, maxLength) => {
-    // Asegúrate de que 'description' no sea null antes de acceder a 'length'
-    if (description && description.length > maxLength) {
-      return `${description.substring(0, maxLength)}...`;
-    }
-    return description;
-  };
-  
+ const truncateDescription = (description, maxLength) => {
+  // Asegúrate de que 'description' no sea null antes de acceder a 'length'
+  if (description && description.length > maxLength) {
+    return `${description.substring(0, maxLength)}...`;
+  }
+  return description;
+};
+
 
   const handleSearchChange = (e) => {
     const searchText = e.target.value.toLowerCase();
