@@ -75,7 +75,7 @@ function CrearEditarDocente() {
           console.error("Error al actualizar el docente", error);
         });
     } else {
-      DocentesService.createDocente(docenteDataToSend)
+      DocentesService.createDocenteUsuario(docenteDataToSend)
         .then((response) => {
           console.log("Docente creado con éxito", response.data);
           navigate("/login-docente");

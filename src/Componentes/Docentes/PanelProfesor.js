@@ -27,9 +27,9 @@ const PanelEstudiante = () => {
 
   return (
     <div>
-      <HeaderDocente />
-      <ListaDocumentos />
-      <Footer />
+      <HeaderDocente/>
+      <ListaDocumentos/>
+      <Footer/>
     </div>
   );
 };
