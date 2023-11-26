@@ -63,7 +63,7 @@ const CrearDocumento = () => {
       };
 
       // Llama al servicio para crear el documento
-      const response = await DocentesService.createDocente(documentoDataToSend);
+      const response = await DocentesService.createDocumento(documentoDataToSend);
 
       console.log('Respuesta del servidor:', response.data);
 
