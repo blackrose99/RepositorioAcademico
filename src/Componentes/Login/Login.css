@@ -118,11 +118,11 @@ h2 {
 }
 
 button[type="submit"] {
-  background-color: #08a913; /* Azul */
+  background-color: #08a4a9; /* Azul */
 }
 
 button[type="submit"]:hover {
-  background-color: #08d7e2; /* Azul más oscuro al pasar el cursor */
+  background-color: #6608e2; /* Azul más oscuro al pasar el cursor */
 }
 
 p {
@@ -131,11 +131,11 @@ p {
 }
 
 .btn-info {
-  background-color: #4CAF50; /* Verde */
+  background-color: #6608e2; /* Verde */
 }
 
 .btn-info:hover {
-  background-color: #0db115; /* Verde más oscuro al pasar el cursor */
+  background-color: #db08e2; /* Verde más oscuro al pasar el cursor */
 }
 
 .login-container {

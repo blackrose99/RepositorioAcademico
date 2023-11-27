@@ -5,6 +5,8 @@ const Footer = () => {
   return (
     <footer className="footer text-center">
       <div className="container mx-auto">
+      <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                          style={{ width: '185px' }} alt="logo" />
         <div className="row">
           <div className="col-md-4 mx-auto">
             <h5>Información de Contacto</h5>

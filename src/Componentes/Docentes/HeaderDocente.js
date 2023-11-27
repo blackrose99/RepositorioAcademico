@@ -28,8 +28,8 @@ const PanelEstudiante = () => {
     <header className="header">
       <div className="containerHeader">
         <div className="logo">
-          <img src={logo} alt="Logo de la aplicación" />
-          <span className='tituloHeader'>{docente.primerNombre} {docente.segundoNombre} {docente.primerApellido} {docente.segundoApellido}</span>
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                          style={{ width: '185px' }} alt="logo" />          <span className='tituloHeader'>{docente.primerNombre} {docente.segundoNombre} {docente.primerApellido} {docente.segundoApellido}</span>
         </div>
         <nav>
           <ul>
