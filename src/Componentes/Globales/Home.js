@@ -63,18 +63,19 @@ const LandingPage = () => {
               </div>
             </div>
             <div className="col-md-12">
-              <div className="card mb-3">
-                <div className="card-body">
-                  <h5 className="card-title">Testimonios de Usuarios</h5>
-                  <p className="card-text">
-                    "Excelente plataforma para encontrar material educativo de calidad." - Profesor: Barney
-                  </p>
-                  <p className="card-text">
-                    "¡Muy útil! Encontré exactamente lo que necesitaba para mi clase." - Estudiante: Zamora
-                  </p>
-                </div>
-              </div>
-            </div>
+  <div className="card mb-3 color-negro">
+    <div className="card-body">
+      <h5 className="card-title">Testimonios de Usuarios</h5>
+      <p className="card-text">
+        "Excelente plataforma para encontrar material educativo de calidad." - Profesor: Barney
+      </p>
+      <p className="card-text">
+        "¡Muy útil! Encontré exactamente lo que necesitaba para mi clase." - Estudiante: Zamora
+      </p>
+    </div>
+  </div>
+</div>
+
             {/* ... (similar structure for other portfolio items) */}
           </div>
         </div>
