@@ -36,7 +36,7 @@ function EstudianteLoginForm() {
         <h2>Inicio de Sesión de Estudiantes</h2>
         <form onSubmit={handleLogin}>
           <label>
-            Correo Electrónico o Usuario:
+            Correo Electrónico:
             <input
               type="text"
               value={correoOUsuario}

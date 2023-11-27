@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import DocentesService from '../../Services/DocenteServices';
 import { useParams, useNavigate } from 'react-router-dom';
 import HeaderDocente from '../Docentes/HeaderDocente';
+import "./DocumentosAdd.css";
 
 const CrearDocumento = () => {
   const { id: docenteId } = useParams();

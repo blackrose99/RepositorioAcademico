@@ -126,7 +126,7 @@ button[type="submit"]:hover {
 }
 
 p {
-  color: red;
+  color: rgb(251, 251, 251);
   margin-top: 10px;
 }
 
@@ -140,10 +140,18 @@ p {
 
 .login-container {
   text-align: center;
-  margin: 0 auto; /* Para centrar horizontalmente */
-  width: 300px; /* Ancho deseado del contenedor */
+  margin: 0 auto;
+  width: 300px;
+  padding: 20px; /* Añade un espacio interno para el sombreado */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombreado */
+  background-color: rgba(93, 92, 92, 0.378); /* Fondo blanco para resaltar el componente */
+  color: white;
+  text-shadow: -1px -1px 0 #000,  
+                1px -1px 0 #000,
+               -1px 1px 0 #000,
+                1px 1px 0 #000; /* Añade el efecto de contorno al texto */
 }
-
 .fondo1 {
   background-image: url('../Login/ImgLogin/bg.jpg');
   background-size: cover; /* Para cubrir todo el contenedor */
@@ -156,3 +164,4 @@ p {
   background-size: cover; /* Para cubrir todo el contenedor */
   background-position: center; /* Centrar la imagen */
 }
+

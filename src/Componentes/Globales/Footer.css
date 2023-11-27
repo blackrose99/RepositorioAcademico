@@ -1,22 +1,40 @@
+/* Estilos para el footer */
 .footer {
-  width: 100%;
   background-color: #337ab7;
   color: #fff;
   padding: 40px 0;
-  text-align: center;
-  transition: background-color 0.3s;
 }
 
-.footer h5 {
-  color: #fff;
-}
-
+/* Estilos para los enlaces */
 .footer a {
   color: #fff;
+  text-decoration: none;
   transition: color 0.3s;
 }
 
 .footer a:hover {
+  color: #ffcc00; /* Cambia el color al pasar el cursor sobre el enlace */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilos para los elementos de lista */
+.footer ul {
+  padding: 0;
+  list-style: none;
+}
+
+.footer .footer-link {
+  color: #fff;
   text-decoration: none;
-  color: rgb(233, 226, 17);
+  transition: color 0.3s;
+}
+
+.footer .footer-link:hover {
+  color: #ffcc00; /* Cambia el color al pasar el cursor sobre el enlace */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Estilos para el texto de derechos de autor */
+.footer p {
+  margin: 0;
 }
