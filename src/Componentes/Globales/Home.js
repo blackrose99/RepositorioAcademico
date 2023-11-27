@@ -76,6 +76,7 @@ const LandingPage = () => {
                 </div>
               </div>
             </div>
+            {/* ... (similar structure for other portfolio items) */}
           </div>
         </div>
       </div>
