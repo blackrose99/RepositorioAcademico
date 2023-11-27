@@ -11,54 +11,33 @@ const LandingPage = () => {
   return (
     <div>
       <Header />
-      <div className="inicio-fondo">
-
-        <div className="row">
-        <div className="col-md-12">
-            <div className="card mb-3">
-              <div className="card-body">
-                {/* <img src={imgDocetes} className="card-img-top" alt="Docentes" /> */}
-
-                <h5 className="card-title">Bienvenido</h5>
-                <p className="card-text">
-                  ¡Bienvenido al Repositorio Académico! Aquí podrás acceder a una amplia variedad de recursos educativos para estudiantes y docentes. Explora materiales, comparte conocimientos y encuentra herramientas útiles para enriquecer tu aprendizaje o enseñanza.
-                </p>
-              </div>
-            </div>
+      {/* Portfolio Section */}
+      <section className="page-section portfolio" id="portfolio">
+        <div className="container">
+          {/* Portfolio Section Heading */}
+          <h2 className="page-section-heading text-center text-uppercase text-secondary mb-0">Portfolio</h2>
+          {/* Icon Divider */}
+          <div className="divider-custom">
+            <div className="divider-custom-line"></div>
+            <div className="divider-custom-icon"><i className="fas fa-star"></i></div>
+            <div className="divider-custom-line"></div>
           </div>
-          <div className="col-md-6">
-            <div className="card mb-3">
-              <div className="card-body">
-                <img src={imgEstudiantes} className="card-img-top" alt="Estudiantes" />
-
-                <h5 className="card-title">Estudiantes</h5>
-                <p className="card-text">
-                  Bienvenido al Repositorio Académico, un lugar para acceder a materiales educativos.
-                </p>
-                <Link to="/login-estudiante" className="btn btn-primary">
-                  Iniciar Sesión como Estudiante
-                </Link>
+          {/* Portfolio Grid Items */}
+          <div className="row justify-content-center">
+            {/* Portfolio Item 1 */}
+            <div className="col-md-6 col-lg-4 mb-5">
+              <div className="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
+                <div className="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                  <div className="portfolio-item-caption-content text-center text-white"><i className="fas fa-plus fa-3x"></i></div>
+                </div>
+                <img className="img-fluid" src="assets/img/portfolio/cabin.png" alt="..." />
               </div>
             </div>
-          </div>
-          <div className="col-md-6">
-            <div className="card mb-3">
-              <div className="card-body">
-                <img src={imgDocetes} className="card-img-top" alt="Docentes" />
-
-                <h5 className="card-title">Docentes</h5>
-                <p className="card-text">
-                  Gestiona y sube materiales educativos para compartir con tus estudiantes.
-                </p>
-                <Link to="/login-docente" className="btn btn-primary">
-                  Iniciar Sesión como Docente
-                </Link>
-              </div>
-            </div>
+            {/* ... (similar structure for other portfolio items) */}
           </div>
         </div>
-     
-      </div>
+      </section>
+    
       <Footer />
     </div>
   );
