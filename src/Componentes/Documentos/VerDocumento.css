@@ -68,26 +68,19 @@
   background-color: rgb(236, 26, 11)
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+
 
 
 
 
 .modal-overlay {
+  width: 100vw;
+  height: 100vh;
   position: fixed;
   top: 0;
-  left: 0;
   right: 0;
   bottom: 0;
+  left: 0;
   background-color: rgba(0, 0, 0, 0.3);
   display: flex;
   justify-content: center;
@@ -96,9 +89,14 @@
 
 .modal-content {
   background-color: #fff;
-  padding: 20px;
+  padding: 10px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.1s ease-in-out;
+  text-align: center;
+  max-width: 80%; /* Establece el ancho máximo del contenido */
+  width: 200px;
+  overflow: auto; /* Permite el desplazamiento si el contenido es demasiado grande */
 }
 
+/* Añade cualquier otro estilo necesario para adaptarse a tus necesidades */

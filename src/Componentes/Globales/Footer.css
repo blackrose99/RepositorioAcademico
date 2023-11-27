@@ -2,7 +2,7 @@
 .footer {
   background-color: #337ab7;
   color: #fff;
-  padding: 40px 0;
+  padding: 20px;
 }
 
 /* Estilos para los enlaces */
@@ -29,12 +29,3 @@
   transition: color 0.3s;
 }
 
-.footer .footer-link:hover {
-  color: #ffcc00; /* Cambia el color al pasar el cursor sobre el enlace */
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-}
-
-/* Estilos para el texto de derechos de autor */
-.footer p {
-  margin: 0;
-}

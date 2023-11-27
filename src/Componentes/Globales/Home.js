@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import './Home.css';
@@ -15,7 +14,7 @@ const LandingPage = () => {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <div className="card mb-3">
+              <div className="card ">
                 <div className="card-body">
                   <h5 className="card-title">¡Bienvenido al Repositorio Académico!</h5>
                   <p className="card-text">
@@ -28,7 +27,7 @@ const LandingPage = () => {
               </div>
             </div>
             <div className="col-md-6">
-              <div className="card mb-3">
+              <div className="card ">
                 <img src={imgEstudiantes} className="card-img-top" alt="Estudiantes" />
                 <div className="card-body">
                   <h5 className="card-title">Estudiantes</h5>

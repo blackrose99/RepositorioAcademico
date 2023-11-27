@@ -55,7 +55,7 @@ const ListaDocumentos = () => {
              
                         <HeaderDocente />
           
-        <div className='col-md-9'>
+        <div className='col-md-12'>
             <table id="documentosTable" className="table mb-5">
                 <thead>
                     <tr>

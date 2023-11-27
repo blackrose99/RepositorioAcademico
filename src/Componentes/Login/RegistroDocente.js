@@ -88,14 +88,18 @@ function CrearEditarDocente() {
 
   return (
     <div>
-      <Header/>
+<Header/>
+
+    <div className=" d-flex align-items-center justify-content-center">
+      
       <div className="col-md-6">
         <div>
-          <Link to="/login-docente" className="btn btn-info mt-3 mb-5">
+   
+        </div>
+        <h2>{editing ? "Editar Mi Imformacion" : "Registrame Como Docente"}</h2>
+        <Link to="/login-docente" className="btn btn-info mt-3 mb-5">
             ← Volver
           </Link>
-        </div>
-        <h2>{editing ? "Editar Docente" : "Crear Docente"}</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Número de Documento:</label>
@@ -185,10 +189,11 @@ function CrearEditarDocente() {
           </div>
           <div className="form-group mt-3 mb-3">
             <button type="submit" className="btn btn-primary mb-5">
-              {editing ? "Guardar Cambios" : "Crear Docente"}
+              {editing ? "Guardar Cambios" : "Registrarme"}
             </button>
           </div>
         </form>
+      </div>
       </div>
       <Footer/>
     </div>

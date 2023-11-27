@@ -92,12 +92,11 @@ function CrearEditarEstudiante() {
       <Header />
 
       <div className="form-container">
-        <div className="back-button">
-          <Link to="/login-estudiante" className="btn btn-info">
+  
+        <h2 className="form-title">{editing ? "Editar Estudiante" : "Crear Estudiante"}</h2>
+        <Link to="/login-docente" className="btn btn-info mt-3 mb-5">
             ← Volver
           </Link>
-        </div>
-        <h2 className="form-title">{editing ? "Editar Estudiante" : "Crear Estudiante"}</h2>
         <form className="form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Número de Documento:</label>
@@ -188,7 +187,7 @@ function CrearEditarEstudiante() {
 
           <div className="form-group mt-3 mb-3">
             <button type="submit" className="btn btn-primary mb-5">
-              {editing ? "Guardar Cambios" : "Crear Estudiante"}
+              {editing ? "Guardar Cambios" : "Registrarme"}
             </button>
           </div>
         </form>

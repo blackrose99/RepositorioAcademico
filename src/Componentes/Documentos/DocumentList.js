@@ -3,7 +3,10 @@ import DocentesService from '../../Services/DocenteServices';
 import { useParams, Link } from 'react-router-dom';
 import "./ListaDocumentos.css";
 import logo from '../Globales/img_G/unnamed.png'; // Importa la imagen del logotipo
+import Modal from 'react-modal';
+import { RingLoader } from 'react-spinners';
 
+Modal.setAppElement('#root');
 
 const ListaDocumentos = () => {
   const { id: docenteId } = useParams();
@@ -11,6 +14,11 @@ const ListaDocumentos = () => {
   const [documentosFiltrados, setDocumentosFiltrados] = useState([]);
   const [filtroFecha, setFiltroFecha] = useState('');
   const [filtroCategoria, setFiltroCategoria] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(true);
+  const [showDownloadAnimation, setShowDownloadAnimation] = useState(false);
+  const [showDownloadButton, setShowDownloadButton] = useState(true);
 
   useEffect(() => {
     const fetchDocumentos = async () => {
@@ -19,22 +27,24 @@ const ListaDocumentos = () => {
         const documentosData = response.data;
         setDocumentosOriginales(documentosData);
         setDocumentosFiltrados(documentosData);
+        setLoading(false);
+        setModalIsOpen(false);
       } catch (error) {
         console.error('Error al obtener la lista de documentos:', error);
+        setError(error);
+        setLoading(false);
       }
     };
 
     fetchDocumentos();
   }, [docenteId]);
 
- const truncateDescription = (description, maxLength) => {
-  // Asegúrate de que 'description' no sea null antes de acceder a 'length'
-  if (description && description.length > maxLength) {
-    return `${description.substring(0, maxLength)}...`;
-  }
-  return description;
-};
-
+  const truncateDescription = (description, maxLength) => {
+    if (description && description.length > maxLength) {
+      return `${description.substring(0, maxLength)}...`;
+    }
+    return description;
+  };
 
   const handleSearchChange = (e) => {
     const searchText = e.target.value.toLowerCase();
@@ -54,30 +64,40 @@ const ListaDocumentos = () => {
   };
 
   const filterDocuments = (searchText, fecha, categoria) => {
-    // Filtrar documentos en base a los valores actuales de searchText, fecha y categoria
     const documentosFiltrados = documentosOriginales.filter((documento) => {
       const nombreMatch = documento.nombre.toLowerCase().includes(searchText);
-  
-      // Convertir la fecha de publicación a cadena antes de usar includes
       const fechaMatch = !fecha || documento.fechaPublicacion.toString().includes(fecha);
-      
       const categoriaMatch = !categoria || documento.categoria === categoria;
-  
+
       return nombreMatch && fechaMatch && categoriaMatch;
     });
-  
+
     setDocumentosFiltrados(documentosFiltrados);
   };
-  
-  
 
-const handleAnioChange = (e) => {
-  const anio = e.target.value;
-  setFiltroFecha(anio);
-  filterDocuments('', anio, filtroCategoria);
-};
+  const handleAnioChange = (e) => {
+    const anio = e.target.value;
+    setFiltroFecha(anio);
+    filterDocuments('', anio, filtroCategoria);
+  };
 
+  if (error) {
+    return <div>Error al obtener la lista de documentos: {error.message}</div>;
+  }
 
+  if (loading) {
+    return (
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+        className="modal-content"
+        overlayClassName="modal-overlay"
+      >
+        <RingLoader color="#36D7B7" loading={loading} size={150} />
+        <div>Cargando...</div>
+      </Modal>
+    );
+  }
 
   return (
     <div className='container'>
@@ -107,7 +127,6 @@ const handleAnioChange = (e) => {
               <option value="2021">2021</option>
               <option value="2022">2022</option>
               <option value="2023">2023</option>
-              {/* Agrega más años según sea necesario */}
             </select>
           </div>
         </div>
