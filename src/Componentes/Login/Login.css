@@ -125,10 +125,7 @@ button[type="submit"]:hover {
   background-color: #6608e2; /* Azul más oscuro al pasar el cursor */
 }
 
-p {
-  color: rgb(251, 251, 251);
-  margin-top: 10px;
-}
+
 
 .btn-info {
   background-color: #6608e2; /* Verde */
